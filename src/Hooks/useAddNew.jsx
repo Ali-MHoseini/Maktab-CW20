@@ -4,15 +4,14 @@ const useAddNew = (url, newItem) => {
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    fetch(fetch(url, {
+    fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json;charset=utf-8",
       },
       body: JSON.stringify(newItem),
-    }))
-      .then((res) => res.json())
-      .then((data) => setData(data));
+    })
+      .then((res) => setData(res.ok));
   }, [url, newItem]);
 
   return [data];
