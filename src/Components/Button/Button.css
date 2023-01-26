@@ -1,0 +1,14 @@
+.fo-btn{
+    border: none;
+    outline: none;
+    color: white;
+    text-align: center;
+    font-family: sans-serif;
+    border-radius: 8px;
+    cursor: pointer;
+    margin: 10px 5px;
+    font-weight: 800;
+}
+.fo-btn:hover{
+    opacity: 0.6;
+}
