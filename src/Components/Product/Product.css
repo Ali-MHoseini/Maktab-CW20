@@ -6,11 +6,9 @@
 
 .ProductBox{
     width: 20rem;
+    position: relative;
     height: 15rem;
-    position:absolute;
     background-color: white;
-    top: 200px;
-    left: 200px;
     padding:1rem;
     display: flex;
     gap:2rem;
@@ -22,7 +20,6 @@
     position: absolute;
     bottom: 10px;
     left:0;
-    background-color:red;
     width: 100%;
     display: flex;
     justify-content:center;
