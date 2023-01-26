@@ -1,0 +1,27 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+.ProductBox{
+    width: 20rem;
+    position: relative;
+    height: 15rem;
+    background-color: white;
+    padding:1rem;
+    display: flex;
+    gap:2rem;
+    flex-direction:column;
+    box-shadow: 0 0 5px 1px #d3d3d3;
+}
+
+.ButtonBox {
+    position: absolute;
+    bottom: 10px;
+    left:0;
+    width: 100%;
+    display: flex;
+    justify-content:center;
+    gap: 0.8rem;
+}

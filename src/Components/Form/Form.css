@@ -4,8 +4,8 @@
     box-sizing: border-box;
 }
 .fo-container{
-    margin: auto;
-    width: 500px;
+    text-align:start;
+    width: 30%;
     height: 100%;
 }
 form{
