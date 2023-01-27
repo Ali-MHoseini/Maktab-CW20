@@ -9,7 +9,12 @@ function App() {
   const [isAdd, setIsAdd] = useState(false);
   const [deleteItemId,setDeleteItemId] = useState('')
   const [mainData, setMainData] = useState([]);
+  const [editItemId,setEditItemId] = useState("")
+  const [isEdit , setIsEdit] = useState(false)
   useFetchAll("https://63a3f3dc9704d18da099a375.mockapi.io/test", setMainData);
+
+
+
 
   useEffect(() => {
     let resopnseData;
@@ -24,7 +29,8 @@ function App() {
         .then((res) => res.json())
         .then((data) => (resopnseData = data))
         .then(() => setIsAdd(false))
-        .then(() => setMainData([...mainData, resopnseData]));
+        .then(() => setMainData([...mainData, resopnseData]))
+        .then(() => setNewData({ title: "", description: "" }))
     }
   }, [isAdd]);
 
@@ -44,6 +50,28 @@ function App() {
       }
   },[deleteItemId])
 
+    useEffect(()=>{
+        if(isEdit){
+            fetch(`https://63a3f3dc9704d18da099a375.mockapi.io/test/${editItemId}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json;charset=utf-8",
+                },
+                body: JSON.stringify(newData),
+            })
+                .then((res) => res.json())
+                .then(() => {
+                    setMainData(mainData.map(item =>{
+                        if(item.id === editItemId){
+                            return newData
+                        }else{
+                            return {...item}
+                        }
+                    }))
+                }).then(() => setNewData({ title: "", description: "" }))
+        }
+    },[isEdit])
+
 
   const addToTitle = (value) => {
     setNewData({ ...newData, title: value });
@@ -51,6 +79,11 @@ function App() {
   const addToDescription = (value) => {
     setNewData({ ...newData, description: value });
   };
+  const getId = (id) => {
+      let newItemEdited = mainData.filter(item => item.id === id);
+      setNewData({title: newItemEdited[0].title, description: newItemEdited[0].description})
+      setEditItemId(id)
+  }
 
   return (
     <div className="App">
@@ -62,6 +95,7 @@ function App() {
               title={item.title}
               description={item.description}
               DelFunc={()=>setDeleteItemId(item.id)}
+              EditFunc={() => getId(item.id)}
             />
           ))}
       </div>
@@ -69,6 +103,8 @@ function App() {
         AddTitle={(e) => addToTitle(e.target.value)}
         AddDescription={(e) => addToDescription(e.target.value)}
         setData={() => setIsAdd(true)}
+        value={newData}
+        EditFuncItem={() => setIsEdit(true)}
       />
     </div>
   );
