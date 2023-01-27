@@ -7,7 +7,7 @@ const Product = ({title,description,DelFunc,EditFunc})=> {
             <p>{description}</p>
             <div className='ButtonBox'>
                 <Button name="Edit-Item" color="5BB1FB" pad="40" />
-                <Button name="Delete" color="A1A6AC" pad="30" onClick={DelFunc} />
+                <Button name="Delete" color="A1A6AC" pad="30" setData={DelFunc} />
             </div>
         </div>
     )
