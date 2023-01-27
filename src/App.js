@@ -7,6 +7,7 @@ import Form from "./Components/Form/Form";
 function App() {
   const [newData, setNewData] = useState({ title: "", description: "" });
   const [isAdd, setIsAdd] = useState(false);
+  const [deleteItemId,setDeleteItemId] = useState('')
   const [mainData, setMainData] = useState([]);
   useFetchAll("https://63a3f3dc9704d18da099a375.mockapi.io/test", setMainData);
 
@@ -27,6 +28,23 @@ function App() {
     }
   }, [isAdd]);
 
+  useEffect(()=>{
+      if(deleteItemId){
+          fetch(`https://63a3f3dc9704d18da099a375.mockapi.io/test/${deleteItemId}`, {
+              method: "DELETE",
+              headers: {
+                  "Content-Type": "application/json;charset=utf-8",
+              },
+              body: JSON.stringify(newData),
+          })
+              .then((res) => res.json())
+              .then(() => {
+                  setMainData(mainData.filter(item=> item.id !==deleteItemId))
+              });
+      }
+  },[deleteItemId])
+
+
   const addToTitle = (value) => {
     setNewData({ ...newData, title: value });
   };
@@ -43,6 +61,7 @@ function App() {
               key={item.id}
               title={item.title}
               description={item.description}
+              DelFunc={()=>setDeleteItemId(item.id)}
             />
           ))}
       </div>
