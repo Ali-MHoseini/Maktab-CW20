@@ -1,6 +1,5 @@
 import React from "react";
 import "./Button.css";
-import useAddNew from "../../Hooks/useAddNew";
 
 function Button (props) {
 
