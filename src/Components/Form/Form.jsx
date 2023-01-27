@@ -2,15 +2,8 @@ import React , {useState} from "react";
 import "./Form.css";
 import Button from "../Button/Button";
 
-function Form () {
+function Form ({AddDescription,AddTitle,setData}) {
 
-    const titleChangeHandler = (e) => {
-        console.log(e)
-    }
-
-    const descriptionChangeHandler = (e) => {
-        console.log(e)
-    }
 
     return(
        <>
@@ -18,12 +11,12 @@ function Form () {
               <h1 className="fo-title">Edit/Add</h1>
               <form>
                   <lable>Title</lable>
-              <input type="text" onChange={(e) => titleChangeHandler(e.target.value)} className="fo-input"/>
+              <input type="text" onChange={AddTitle} className="fo-input"/>
                   <label>Description</label>
-              <input type="text" onChange={(e) => descriptionChangeHandler(e.target.value)} className="fo-input p2"/>
+              <input type="text" onChange={AddDescription} className="fo-input p2"/>
               </form>
               <Button name="Edit-Item" color="5BB1FB" pad="40" />
-              <Button name="Add" color="A1A6AC" pad="30" />
+              <Button name="Add" color="A1A6AC" pad="30" setData={setData}/>
           </div>
        </>
     )
